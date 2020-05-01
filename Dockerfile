@@ -4,6 +4,7 @@ WORKDIR /go/src/confined
 
 # We only copy the module files
 COPY go.mod .
+COPY go.sum .
 
 # We download all dependencies and bake them into the temporary deps image
 RUN go mod download -x \

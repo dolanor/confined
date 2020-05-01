@@ -3,14 +3,18 @@ package main
 import (
 	"log"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Hello, " + r.URL.Path[1:]))
+	router := mux.NewRouter()
+	router.HandleFunc("/{name}", func(w http.ResponseWriter, r *http.Request) {
+		vars := mux.Vars(r)
+		w.Write([]byte("Hello, " + vars["name"]))
 	})
 
 	host := ":1337"
 	log.Println("Listening on", host)
-	log.Fatal(http.ListenAndServe(host, nil))
+	log.Fatal(http.ListenAndServe(host, router))
 }
