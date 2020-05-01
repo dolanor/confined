@@ -1,5 +1,7 @@
 FROM golang:1.14 AS deps
 
+WORKDIR /go/src/confined
+
 # We only copy the module files
 COPY go.mod .
 
