@@ -19,8 +19,11 @@ RUN go test -v ./...
 RUN go get -v ./...
 
 
+# We use a minimalist image to minimize size for pushing to registry and storing
 FROM gcr.io/distroless/base
 
+# We copy the binary built in the built stage into the / of the final image
 COPY --from=build /go/bin/confined /
 
+# We define the default command when running the image
 CMD [ "/confined" ]
