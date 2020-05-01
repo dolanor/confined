@@ -1,0 +1,5 @@
+version: "3"
+services:
+  confined:
+    image: dolanor/confined:v0
+    build: .
